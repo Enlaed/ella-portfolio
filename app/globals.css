@@ -231,61 +231,124 @@ main {
 
 /* ---------------- WORK ---------------- */
 
+/* ---------------- WORK ---------------- */
+
 .work {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 120px 5vw;
+  padding: 140px 5vw;
 }
 
 .sectionHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-
-  margin-bottom: 70px;
+  margin-bottom: 75px;
 }
 
 .sectionHeader h2 {
-  max-width: 650px;
-
-  font-size: clamp(3rem, 5vw, 5.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.06em;
+  max-width: 720px;
+  font-size: clamp(3.5rem, 5.8vw, 6rem);
+  line-height: 0.86;
+  letter-spacing: -0.065em;
 }
+
+/* PROJECT GRID */
 
 .projectGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 22px;
 }
 
+/* PROJECT CARD */
+
 .projectCard {
-  min-height: 390px;
-  padding: 30px;
+  min-height: 430px;
+  padding: 34px;
 
   position: relative;
+  overflow: hidden;
 
   background: #eae5e8;
+  color: var(--foreground);
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  overflow: hidden;
+  border: 1px solid transparent;
 
   transition:
-    transform 0.35s ease,
-    background 0.35s ease;
+    transform 0.4s cubic-bezier(.2,.8,.2,1),
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* subtle pink glow */
+
+.projectCard::before {
+  content: "";
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  right: -110px;
+  bottom: -130px;
+
+  border-radius: 50%;
+
+  background: var(--pink);
+
+  opacity: 0;
+  transform: scale(0.5);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+/* diagonal accent */
+
+.projectCard::after {
+  content: "";
+  position: absolute;
+
+  width: 1px;
+  height: 0;
+
+  right: 34px;
+  top: 34px;
+
+  background: var(--pink);
+
+  transition: height 0.45s ease;
 }
 
 .projectCard:hover {
-  transform: translateY(-8px);
-  background: var(--pink-light);
+  transform: translateY(-10px);
+  border-color: rgba(232, 62, 140, 0.25);
+
+  box-shadow:
+    0 24px 55px rgba(23, 23, 23, 0.10);
 }
+
+.projectCard:hover::before {
+  opacity: 0.13;
+  transform: scale(1);
+}
+
+.projectCard:hover::after {
+  height: 90px;
+}
+
+/* featured */
 
 .projectCard.featured {
   grid-column: span 2;
-  min-height: 520px;
+  min-height: 540px;
 
   background: var(--foreground);
   color: white;
@@ -295,33 +358,171 @@ main {
   background: #292326;
 }
 
+/* NUMBER */
+
 .projectNumber {
-  font-size: 0.8rem;
+  position: relative;
+  z-index: 2;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid currentColor;
+  border-radius: 50%;
+
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.projectCard:hover .projectNumber {
+  background: var(--pink);
+  color: var(--foreground);
+  border-color: var(--pink);
+
+  transform: rotate(8deg);
+}
+
+/* INFO */
+
+.projectInfo {
+  position: relative;
+  z-index: 2;
 }
 
 .projectInfo p {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  opacity: 0.65;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+
+  opacity: 0.58;
 }
 
 .projectInfo h3 {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  line-height: 0.9;
-  letter-spacing: -0.06em;
+  max-width: 850px;
+
+  font-size: clamp(3rem, 5.2vw, 5.8rem);
+  line-height: 0.86;
+  letter-spacing: -0.065em;
+
+  transition:
+    transform 0.4s cubic-bezier(.2,.8,.2,1);
 }
 
-.projectInfo span {
-  display: inline-block;
-  margin-top: 24px;
+.projectCard:hover .projectInfo h3 {
+  transform: translateX(7px);
+}
 
-  font-size: 0.9rem;
+/* LINK */
+
+.projectInfo span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 30px;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+
   border-bottom: 1px solid currentColor;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
+
+  transition:
+    color 0.3s ease,
+    gap 0.3s ease;
+}
+
+.projectCard:hover .projectInfo span {
+  color: var(--pink);
+  gap: 19px;
+}
+
+/* FEATURED CARD */
+
+.projectCard.featured .projectInfo h3 {
+  font-size: clamp(4rem, 7vw, 8rem);
+}
+
+.projectCard.featured .projectInfo p {
+  color: rgba(255,255,255,0.7);
+}
+
+.projectCard.featured:hover .projectNumber {
+  color: var(--foreground);
+}
+
+/* ---------------- WORK RESPONSIVE ---------------- */
+
+@media (max-width: 800px) {
+
+  .work {
+    padding: 100px 6vw;
+  }
+
+  .sectionHeader {
+    display: block;
+    margin-bottom: 55px;
+  }
+
+  .sectionHeader h2 {
+    margin-top: 35px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectCard.featured {
+    grid-column: span 1;
+  }
+
+  .projectCard {
+    min-height: 370px;
+  }
+
+  .projectCard.featured {
+    min-height: 450px;
+  }
+
+  .projectCard.featured .projectInfo h3 {
+    font-size: clamp(3.3rem, 14vw, 6rem);
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .projectCard {
+    min-height: 340px;
+    padding: 25px;
+  }
+
+  .projectCard.featured {
+    min-height: 390px;
+  }
+
+  .projectCard::after {
+    right: 25px;
+    top: 25px;
+  }
+
+  .projectInfo h3 {
+    font-size: 2.8rem;
+  }
+
 }
 
 /* ---------------- DATA STORIES ---------------- */
@@ -359,33 +560,577 @@ main {
 
 /* ---------------- ABOUT ---------------- */
 
-.about {
+/* ---------------- ABOUT PAGE ---------------- */
+
+.aboutPage {
+  background: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+
+/* ---------------- ABOUT HERO ---------------- */
+
+.aboutHero {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 70px 5vw 130px;
+}
+
+.aboutHeroTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aboutHeroNumber {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  opacity: 0.4;
+}
+
+.aboutHero h1 {
+  margin-top: 120px;
+
+  font-size: clamp(5rem, 13vw, 13rem);
+  line-height: 0.73;
+  letter-spacing: -0.09em;
+}
+
+.aboutHero h1 span {
+  color: var(--pink);
+}
+
+.aboutHeroBottom {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 80px;
+
+  margin-top: 120px;
+
+  align-items: end;
+}
+
+.aboutLead {
+  max-width: 650px;
+
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+
+/* ORB */
+
+.aboutOrb {
+  width: 210px;
+  height: 210px;
+
+  border: 1px solid rgba(33, 27, 32, 0.2);
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 7px;
+
+  position: relative;
+}
+
+.aboutOrb::before {
+  content: "";
+
+  position: absolute;
+
+  width: 12px;
+  height: 12px;
+
+  background: var(--pink);
+
+  border-radius: 50%;
+
+  top: 22px;
+  right: 30px;
+}
+
+.aboutOrb span {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  opacity: 0.5;
+}
+
+
+/* ---------------- STATEMENT ---------------- */
+
+.aboutStatement {
+  padding: 140px 5vw;
+
+  background: var(--foreground);
+  color: white;
+
+  position: relative;
+}
+
+.aboutStatement h2 {
+  max-width: 1100px;
+
+  margin-top: 70px;
+
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: -0.085em;
+}
+
+.aboutStatement h2 span {
+  color: var(--pink);
+}
+
+.statementNote {
+  display: flex;
+
+  max-width: 430px;
+
+  gap: 25px;
+
+  margin-left: auto;
+  margin-top: 110px;
+}
+
+.statementNote span {
+  color: var(--pink);
+  font-size: 0.65rem;
+}
+
+.statementNote p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+
+/* ---------------- JOURNEY ---------------- */
+
+.aboutJourney {
   max-width: 1400px;
   margin: 0 auto;
 
-  padding: 150px 5vw;
+  padding: 140px 5vw;
+
+  display: grid;
+  grid-template-columns: 35% 65%;
+
+  gap: 80px;
 }
 
-.about h2 {
-  max-width: 1000px;
+.journeyIntro h2 {
+  margin-top: 35px;
 
-  font-size: clamp(3.5rem, 7vw, 7.5rem);
-  line-height: 0.88;
-  letter-spacing: -0.075em;
+  font-size: clamp(3.8rem, 7vw, 7rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
 }
 
-.about h2 span {
+.journeyIntro h2 span {
   color: var(--pink);
-  font-style: italic;
 }
 
-.aboutText {
-  max-width: 650px;
-  margin: 55px 0 0 auto;
+.journeyText {
+  max-width: 700px;
+
+  padding-top: 50px;
+}
+
+.journeyText p {
+  font-size: 1rem;
+  line-height: 1.85;
 
   color: var(--muted);
-  font-size: 1.2rem;
-  line-height: 1.7;
+
+  margin-bottom: 45px;
+}
+
+
+/* ---------------- THREAD ---------------- */
+
+.experienceStrip {
+  padding: 120px 5vw;
+
+  background: #f8e9f1;
+}
+
+.experienceStripHeader {
+  max-width: 1400px;
+  margin: 0 auto 70px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.experienceStripHeader > p:last-child {
+  max-width: 280px;
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+
+  color: var(--muted);
+}
+
+.experienceGrid {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  border-top: 1px solid rgba(33, 27, 32, 0.15);
+}
+
+.experienceItem {
+  min-height: 260px;
+
+  padding: 30px;
+
+  border-right: 1px solid rgba(33, 27, 32, 0.15);
+
+  transition:
+    background 0.35s ease,
+    transform 0.35s ease;
+}
+
+.experienceItem:last-child {
+  border-right: none;
+}
+
+.experienceItem:hover {
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateY(-5px);
+}
+
+.experienceItem span {
+  color: var(--pink);
+
+  font-size: 0.65rem;
+}
+
+.experienceItem strong {
+  display: block;
+
+  margin-top: 80px;
+
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.experienceItem p {
+  margin-top: 10px;
+
+  color: var(--muted);
+
+  font-size: 0.68rem;
+}
+
+
+/* ---------------- PHILOSOPHY ---------------- */
+
+.aboutPhilosophy {
+  padding: 150px 5vw;
+
+  background: var(--pink);
+
+  position: relative;
+}
+
+.aboutPhilosophy h2 {
+  max-width: 1150px;
+
+  margin-top: 60px;
+
+  font-size: clamp(4rem, 8.5vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: -0.09em;
+}
+
+.aboutPhilosophy h2 span {
+  color: white;
+}
+
+.philosophyBottom {
+  max-width: 430px;
+
+  margin-left: auto;
+  margin-top: 100px;
+}
+
+.philosophyBottom p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+
+  opacity: 0.65;
+}
+
+
+/* ---------------- WHERE I'M GOING ---------------- */
+
+.aboutNow {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  padding: 140px 5vw;
+}
+
+.aboutNowHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aboutNowHeader > span {
+  color: var(--pink);
+
+  font-size: 0.65rem;
+}
+
+.aboutNow h2 {
+  margin-top: 70px;
+
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.8;
+  letter-spacing: -0.085em;
+}
+
+.aboutNow h2 span {
+  color: var(--pink);
+}
+
+.aboutNowContent {
+  margin-top: 100px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 100px;
+}
+
+.aboutNowContent > p {
+  max-width: 520px;
+
+  color: var(--muted);
+
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.directionList {
+  border-top: 1px solid rgba(33, 27, 32, 0.15);
+}
+
+.directionList div {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+
+  align-items: center;
+
+  padding: 22px 0;
+
+  border-bottom: 1px solid rgba(33, 27, 32, 0.15);
+}
+
+.directionList span {
+  color: var(--pink);
+
+  font-size: 0.62rem;
+}
+
+.directionList strong {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+
+/* ---------------- CTA ---------------- */
+
+.aboutCTA {
+  padding: 130px 5vw;
+
+  background: var(--foreground);
+  color: white;
+}
+
+.aboutCTA h2 {
+  margin-top: 55px;
+
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: -0.09em;
+}
+
+.aboutCTA h2 span {
+  color: var(--pink);
+}
+
+.aboutLinks {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 45px;
+
+  margin-top: 90px;
+}
+
+.aboutLinks a {
+  color: white;
+
+  text-decoration: none;
+
+  font-size: clamp(1.7rem, 3vw, 3rem);
+
+  letter-spacing: -0.04em;
+
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+
+  padding-bottom: 8px;
+
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.aboutLinks a:hover {
+  color: var(--pink);
+
+  border-color: var(--pink);
+
+  transform: translateX(7px);
+}
+
+.aboutLinks span {
+  color: var(--pink);
+}
+
+
+/* ---------------- ABOUT RESPONSIVE ---------------- */
+
+@media (max-width: 900px) {
+
+  .aboutHeroBottom,
+  .aboutJourney,
+  .aboutNowContent {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutOrb {
+    width: 160px;
+    height: 160px;
+  }
+
+  .journeyText {
+    padding-top: 0;
+  }
+
+  .experienceGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .experienceItem:nth-child(2) {
+    border-right: none;
+  }
+
+  .experienceItem:nth-child(-n+2) {
+    border-bottom: 1px solid rgba(33, 27, 32, 0.15);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .aboutHero {
+    padding: 50px 6vw 90px;
+  }
+
+  .aboutHero h1 {
+    margin-top: 80px;
+
+    font-size: 19vw;
+  }
+
+  .aboutHeroBottom {
+    margin-top: 80px;
+    gap: 50px;
+  }
+
+  .aboutLead {
+    font-size: 1.45rem;
+  }
+
+  .aboutStatement,
+  .aboutPhilosophy,
+  .aboutCTA {
+    padding: 100px 6vw;
+  }
+
+  .aboutStatement h2,
+  .aboutPhilosophy h2,
+  .aboutNow h2 {
+    font-size: 15vw;
+  }
+
+  .aboutJourney,
+  .aboutNow {
+    padding: 100px 6vw;
+  }
+
+  .journeyIntro h2 {
+    font-size: 15vw;
+  }
+
+  .experienceStrip {
+    padding: 90px 6vw;
+  }
+
+  .experienceStripHeader {
+    display: block;
+  }
+
+  .experienceStripHeader > p:last-child {
+    margin-top: 25px;
+  }
+
+  .experienceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .experienceItem {
+    min-height: 190px;
+
+    border-right: none !important;
+    border-bottom: 1px solid rgba(33, 27, 32, 0.15);
+  }
+
+  .experienceItem:last-child {
+    border-bottom: none;
+  }
+
+  .experienceItem strong {
+    margin-top: 45px;
+  }
+
+  .aboutNowContent {
+    margin-top: 70px;
+    gap: 65px;
+  }
+
+  .aboutLinks {
+    flex-direction: column;
+    gap: 25px;
+  }
+
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -872,5 +1617,626 @@ footer > a:hover {
     flex-direction: column;
     align-items: flex-start;
     gap: 45px;
+  }
+}
+
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+
+.aboutPage {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* About hero */
+
+.aboutHero {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 100px 5vw 140px;
+}
+
+.aboutHero h1 {
+  font-size: clamp(5rem, 14vw, 13rem);
+  line-height: 0.76;
+  letter-spacing: -0.09em;
+  font-weight: 700;
+}
+
+.aboutHero h1 span {
+  color: var(--pink);
+  font-style: italic;
+}
+
+.aboutLead {
+  max-width: 650px;
+  margin: 65px 0 0 auto;
+
+  color: var(--muted);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.55;
+}
+
+/* Big statement */
+
+.aboutStatement {
+  padding: 150px 8vw;
+
+  background: var(--pink);
+  color: var(--foreground);
+}
+
+.aboutStatement .eyebrow {
+  color: var(--foreground);
+}
+
+.aboutStatement h2 {
+  max-width: 1200px;
+
+  font-size: clamp(4rem, 8vw, 8.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.08em;
+}
+
+.aboutStatement h2 span {
+  color: white;
+  font-style: italic;
+}
+
+/* Journey */
+
+.aboutJourney {
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 150px 5vw;
+
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 100px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.aboutJourney h2 {
+  font-size: clamp(3.5rem, 6vw, 6.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.075em;
+}
+
+.journeyText {
+  max-width: 700px;
+}
+
+.journeyText p {
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1.75;
+}
+
+.journeyText p + p {
+  margin-top: 30px;
+}
+
+/* Experience strip */
+
+.experienceStrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.experienceItem {
+  min-height: 270px;
+  padding: 30px;
+
+  border-right: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.experienceItem:last-child {
+  border-right: none;
+}
+
+.experienceItem:hover {
+  background: var(--foreground);
+  color: white;
+}
+
+.experienceItem span {
+  color: var(--pink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.experienceItem strong {
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.experienceItem p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.experienceItem:hover p {
+  color: #c8c2c5;
+}
+
+/* Where I'm going */
+
+.aboutNow {
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 160px 5vw;
+}
+
+.aboutNow h2 {
+  max-width: 1100px;
+
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+}
+
+.aboutNow h2 span {
+  color: var(--pink);
+  font-style: italic;
+}
+
+.aboutNow > p:last-child {
+  max-width: 650px;
+  margin: 55px 0 0 auto;
+
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* CTA */
+
+.aboutCTA {
+  padding: 110px 5vw;
+
+  background: var(--foreground);
+  color: white;
+}
+
+.aboutCTA .eyebrow {
+  color: var(--pink);
+}
+
+.aboutLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.aboutLinks a {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.aboutLinks a:hover {
+  color: var(--pink);
+  transform: translateX(8px);
+}
+
+/* About responsive */
+
+@media (max-width: 800px) {
+  .aboutHero {
+    padding: 70px 6vw 100px;
+  }
+
+  .aboutHero h1 {
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .aboutLead {
+    margin: 50px 0 0;
+  }
+
+  .aboutStatement {
+    padding: 100px 6vw;
+  }
+
+  .aboutStatement h2 {
+    font-size: clamp(3.5rem, 15vw, 6rem);
+  }
+
+  .aboutJourney {
+    padding: 100px 6vw;
+
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .experienceStrip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .experienceItem {
+    min-height: 220px;
+  }
+
+  .experienceItem:nth-child(2) {
+    border-right: none;
+  }
+
+  .experienceItem:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .aboutNow {
+    padding: 110px 6vw;
+  }
+
+  .aboutNow > p:last-child {
+    margin: 45px 0 0;
+  }
+
+  .aboutCTA {
+    padding: 90px 6vw;
+  }
+
+  .aboutLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
+  }
+}
+
+/* =========================================================
+   CV PAGE
+   ========================================================= */
+
+.cvPage {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* Header */
+
+.cvHeader {
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 90px 5vw 120px;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+}
+
+.cvHeader h1 {
+  margin-top: 25px;
+
+  font-size: clamp(4.5rem, 11vw, 11rem);
+  line-height: 0.78;
+  letter-spacing: -0.09em;
+}
+
+.cvHeader h1 span {
+  color: var(--pink);
+  font-style: italic;
+}
+
+.cvHeaderInfo {
+  max-width: 480px;
+
+  align-self: end;
+}
+
+.cvHeaderInfo p {
+  color: var(--muted);
+
+  font-size: 1.15rem;
+  line-height: 1.65;
+
+  margin-bottom: 35px;
+}
+
+/* Download button */
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 16px 22px;
+
+  background: var(--foreground);
+  color: white;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.primaryButton span {
+  color: var(--pink);
+  font-size: 1.2rem;
+}
+
+.primaryButton:hover {
+  background: var(--pink);
+  color: var(--foreground);
+  transform: translateY(-3px);
+}
+
+.primaryButton:hover span {
+  color: var(--foreground);
+}
+
+/* CV sections */
+
+.cvSection {
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 90px 5vw;
+
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  gap: 80px;
+
+  border-top: 1px solid var(--border);
+}
+
+.cvContent {
+  max-width: 900px;
+}
+
+/* Experience entries */
+
+.cvEntry {
+  padding-bottom: 65px;
+}
+
+.cvEntry + .cvEntry {
+  padding-top: 65px;
+  border-top: 1px solid var(--border);
+}
+
+.cvMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-bottom: 18px;
+
+  color: var(--muted);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+}
+
+.cvEntry h2 {
+  margin: 0;
+
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.cvEntry h3 {
+  margin-top: 12px;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cvEntry > p {
+  max-width: 700px;
+
+  margin-top: 28px;
+
+  color: var(--muted);
+
+  line-height: 1.65;
+}
+
+.cvEntry ul {
+  max-width: 760px;
+
+  margin-top: 25px;
+  padding-left: 20px;
+
+  color: var(--muted);
+
+  line-height: 1.7;
+}
+
+.cvEntry li + li {
+  margin-top: 8px;
+}
+
+.cvEntry.compact {
+  padding-bottom: 0;
+}
+
+/* Courses / skills */
+
+.cvTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cvTags span {
+  padding: 13px 16px;
+
+  border: 1px solid var(--border);
+
+  font-size: 0.9rem;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cvTags span:hover {
+  background: var(--pink);
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+/* Projects */
+
+.cvProject {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+
+  gap: 50px;
+
+  padding: 30px 0;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.cvProject:first-child {
+  padding-top: 0;
+}
+
+.cvProject > div span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--pink);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.cvProject h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.cvProject > p {
+  align-self: end;
+
+  color: var(--muted);
+
+  line-height: 1.6;
+}
+
+/* Footer */
+
+.cvFooter {
+  padding: 120px 8vw;
+
+  background: var(--foreground);
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 80px;
+}
+
+.cvFooter .eyebrow {
+  color: var(--pink);
+}
+
+.cvFooter h2 {
+  margin-top: 20px;
+
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+}
+
+.cvContact {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  min-width: 230px;
+}
+
+.cvContact a {
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+  font-size: 1rem;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cvContact a:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+/* CV responsive */
+
+@media (max-width: 800px) {
+  .cvHeader {
+    padding: 70px 6vw 90px;
+
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .cvHeader h1 {
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .cvHeaderInfo {
+    max-width: 600px;
+  }
+
+  .cvSection {
+    padding: 75px 6vw;
+
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .cvMeta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cvProject {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .cvFooter {
+    padding: 85px 6vw;
+
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
