@@ -1,211 +1,332 @@
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./Home.module.css";
+
 export default function Home() {
   return (
-    <main>
-      {/* NAV */}
-      <nav className="nav">
-        <a href="/" className="logo">
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <Link href="/" className={styles.logo}>
           ELLA<span>.</span>
-        </a>
+        </Link>
 
-        <div className="navLinks">
-          <a href="/#work">Work</a>
-          <a href="/projects/experience">Experience</a>
-          <a href="/about">About</a>
-          <a href="/cv">CV</a>
-          <a href="/#contact">Contact</a>
-        </div>
-      </nav>
+        <nav className={styles.nav} aria-label="Main navigation">
+          <a href="#work">Work</a>
+          <Link href="/about">About</Link>
+          <Link href="/cv">CV</Link>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-      {/* HERO */}
-      <section className="hero">
-        <div className="heroContent">
-          <p className="eyebrow">DATA ANALYST · DATA STORYTELLER</p>
+      <section className={styles.opening} aria-labelledby="home-intro">
+        <div className={styles.hero}>
+          <div className={styles.heroCopy}>
+            <p className={styles.label}>Data analyst · Mathematics · Lagos</p>
 
-          <h1>
-            I FIND THE
-            <br />
-            STORIES <span>HIDDEN</span>
-            <br />
-            IN DATA.
-          </h1>
+            <h1 id="home-intro">
+              Hi, I&apos;m <em>Ella.</em>
+            </h1>
 
-          <p className="heroText">
-            I turn complex data into clear insights, thoughtful
-            visualizations, and stories people can actually understand.
-          </p>
+            <p className={styles.lead}>
+              I work with data, systems, and the questions hiding underneath
+              them.
+            </p>
 
-          <div className="heroActions">
-            <a href="#work" className="primaryButton">
-              Explore my work <span>↓</span>
-            </a>
+            <p className={styles.body}>
+              Mathematics taught me to look for structure. Working with data
+              taught me that the interesting part usually starts when that
+              structure gets messy.
+            </p>
+          </div>
 
-            <a href="/about" className="secondaryButton">
-              About me
-            </a>
+          <div className={styles.heroVisual}>
+            <p className={styles.liveBadge}>
+              <span className={styles.liveDot} />
+              LIVE DATA
+            </p>
+
+            <Link
+              href="/projects/smart-city-lagos"
+              className={styles.heroShot}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/smart-city-lagos/06_city_overview_dashboard_view.png"
+                  alt="Smart City Lagos city overview dashboard"
+                  width={2400}
+                  height={1350}
+                  priority
+                  sizes="(max-width: 760px) 88vw, 42vw"
+                />
+              </span>
+              <span className={styles.heroCaption}>
+                Smart City Lagos <span>↗</span>
+              </span>
+            </Link>
+
+            <div className={styles.dataStream} aria-hidden="true">
+              <span className={`${styles.roll} ${styles.rollA}`}>
+                <span className={styles.rollTrack}>
+                  <span>08.42</span>
+                  <span>73.19</span>
+                  <span>60.95</span>
+                  <span>82.41</span>
+                  <span>08.42</span>
+                </span>
+              </span>
+              <span className={`${styles.roll} ${styles.rollB}`}>
+                <span className={styles.rollTrack}>
+                  <span>4,293</span>
+                  <span>138</span>
+                  <span>186.3</span>
+                  <span>4,293</span>
+                </span>
+              </span>
+              <span className={`${styles.roll} ${styles.rollC}`}>
+                <span className={styles.rollTrack}>
+                  <span>95.7%</span>
+                  <span>315.23</span>
+                  <span>507.18</span>
+                  <span>95.7%</span>
+                </span>
+              </span>
+              <span className={`${styles.roll} ${styles.rollD}`}>
+                <span className={styles.rollTrack}>
+                  <span>315.23</span>
+                  <span>186.3</span>
+                  <span>73.19</span>
+                  <span>315.23</span>
+                </span>
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="heroMark">
-          <div className="circle">
-            <span>DATA</span>
-            <span>STORY</span>
-            <span>∞</span>
+        <div className={styles.personality}>
+          <h2>
+            I like figuring <em>things out.</em>
+          </h2>
+
+          <div className={styles.personalityCopy}>
+            <p>
+              I&apos;m not really interested in just making dashboards. I want
+              to understand the problem behind the data, build useful systems
+              around it, and communicate what I find so someone can actually
+              use it.
+            </p>
+
+            <p className={styles.aside}>
+              Between the datasets: writing, running, swimming, board games.
+            </p>
+
+            <Link href="/about" className={styles.textLink}>
+              More about me <span>→</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* WORK */}
-      <section id="work" className="work">
-        <div className="sectionHeader">
-          <p className="eyebrow">SELECTED WORK</p>
+      <section id="work" className={styles.work}>
+        <p className={styles.workLead}>
+          The work is where the questions get specific — urban systems,
+          database rules, and the difference between a number moving and a
+          business making sense.
+        </p>
 
-          <h2>
-            Things I’ve built
-            <br />
-            with data.
-          </h2>
-        </div>
+        <article className={styles.city}>
+          <div className={styles.projectCopy}>
+            <p className={styles.label}>IoT · PostgreSQL · Python · Power BI</p>
+            <p className={styles.question}>
+              What happens when a city starts talking in data?
+            </p>
+            <h3>Smart City Lagos</h3>
+            <p>
+              A simulated urban intelligence system connecting sensor events,
+              PostgreSQL, Python ingestion, analytical views, risk logic, and
+              Power BI — a way of watching a city as a set of signals rather
+              than a single snapshot.
+            </p>
+            <Link href="/projects/smart-city-lagos" className={styles.textLink}>
+              Explore the project <span>↗</span>
+            </Link>
+          </div>
 
-        <div className="projectGrid">
-
-          {/* SMART CITY */}
-          <a
-            href="/projects/smart-city-lagos"
-            className="projectCard featured"
-          >
-            <div className="projectNumber">01</div>
-
-            <div className="projectInfo">
-              <p>IoT · POSTGRESQL · PYTHON · POWER BI</p>
-
-              <h3>Smart City Lagos</h3>
-
-              <span>
-                Understanding urban systems through data →
+          <div className={styles.cityStage}>
+            <Link
+              href="/projects/smart-city-lagos"
+              className={`${styles.shot} ${styles.cityMain}`}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/smart-city-lagos/06_city_overview_dashboard_view.png"
+                  alt="Smart City Lagos city overview dashboard"
+                  width={2400}
+                  height={1350}
+                  sizes="(max-width: 760px) 92vw, 58vw"
+                />
               </span>
-            </div>
-          </a>
+            </Link>
 
-          {/* NEXUS OPS */}
-          <a
-            href="/projects/nexus-ops"
-            className="projectCard"
-          >
-            <div className="projectNumber">02</div>
-
-            <div className="projectInfo">
-              <p>TIME SERIES · SQL · POSTGRESQL</p>
-
-              <h3>Nexus Ops</h3>
-
-              <span>
-                Exploring operational performance over time →
+            <Link
+              href="/projects/smart-city-lagos"
+              className={`${styles.shot} ${styles.cityDash}`}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/smart-city-lagos/07_device intelligence_dashboard_view.png"
+                  alt="Smart City Lagos device intelligence dashboard"
+                  width={2400}
+                  height={1350}
+                  sizes="(max-width: 760px) 70vw, 42vw"
+                />
               </span>
-            </div>
-          </a>
+            </Link>
+          </div>
+        </article>
 
-          {/* SALES ANALYSIS */}
-          <a
-            href="/projects/sales-analysis"
-            className="projectCard"
-          >
-            <div className="projectNumber">03</div>
-
-            <div className="projectInfo">
-              <p>SQL · EXCEL · DATA VISUALIZATION</p>
-
-              <h3>Sales Analysis</h3>
-
-              <span>
-                Turning sales data into business insight →
+        <article className={styles.nexus}>
+          <div className={styles.nexusStage}>
+            <Link
+              href="/projects/nexus-ops"
+              className={`${styles.shot} ${styles.nexusAnalyst}`}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/nexus-ops/analyst_select.png"
+                  alt="Nexus Ops analyst read-only query"
+                  width={1600}
+                  height={1000}
+                  sizes="(max-width: 760px) 86vw, 48vw"
+                />
               </span>
-            </div>
-          </a>
+            </Link>
 
-        </div>
+            <Link
+              href="/projects/nexus-ops"
+              className={`${styles.shot} ${styles.nexusLogs}`}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/nexus-ops/auditors_logs.png"
+                  alt="Nexus Ops query audit logs"
+                  width={1600}
+                  height={1000}
+                  sizes="(max-width: 760px) 68vw, 34vw"
+                />
+              </span>
+            </Link>
+          </div>
+
+          <div className={styles.projectCopy}>
+            <p className={styles.label}>
+              PostgreSQL · SQL · Access control · Observability
+            </p>
+            <p className={styles.question}>
+              What happens when the data itself needs rules?
+            </p>
+            <h3>Nexus Ops</h3>
+            <p>
+              A PostgreSQL system exploring role-based access, controlled
+              writes, structured telemetry, and query observability — so the
+              data can be used, but not carelessly.
+            </p>
+            <Link href="/projects/nexus-ops" className={styles.textLink}>
+              Explore the project <span>↗</span>
+            </Link>
+          </div>
+        </article>
+
+        <article className={styles.sales}>
+          <div className={styles.projectCopy}>
+            <p className={styles.label}>SQL · Excel · Data visualization</p>
+            <p className={styles.question}>
+              What happens when thousands of rows are really trying to tell
+              you why the business is moving?
+            </p>
+            <h3>Sales Analysis</h3>
+            <p>
+              An analysis of sales trends, customer value, product
+              performance, discounts, and regional patterns — paying attention
+              to the gap between revenue moving and the business actually
+              being profitable.
+            </p>
+            <Link href="/projects/sales-analysis" className={styles.textLink}>
+              Explore the project <span>↗</span>
+            </Link>
+          </div>
+
+          <div className={styles.salesStage}>
+            <Link
+              href="/projects/sales-analysis"
+              className={`${styles.shot} ${styles.salesMain}`}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/sales-analysis/discount-impact-on-profit.png"
+                  alt="Sales Analysis chart of discount impact on profit"
+                  width={2400}
+                  height={1350}
+                  sizes="(max-width: 760px) 92vw, 48vw"
+                />
+              </span>
+            </Link>
+
+            <Link
+              href="/projects/sales-analysis"
+              className={`${styles.shot} ${styles.salesTrend}`}
+            >
+              <span className={styles.shotFrame}>
+                <Image
+                  src="/projects/sales-analysis/monthly-sales-trend.png"
+                  alt="Sales Analysis monthly sales trend"
+                  width={2400}
+                  height={1350}
+                  sizes="(max-width: 760px) 70vw, 38vw"
+                />
+              </span>
+            </Link>
+          </div>
+        </article>
       </section>
 
-      {/* EXPERIENCE */}
-      <section className="experiencePreview">
-        <div>
-          <p className="eyebrow">EXPERIENCE</p>
-
-          <h2>
-            Data doesn't
-            <br />
-            exist in a vacuum.
-          </h2>
-        </div>
-
-        <div className="experiencePreviewText">
-          <p>
-            My experience spans analytics, operations, logistics,
-            telecommunications, and software — giving me a practical
-            understanding of how data moves from messy reality to
-            meaningful decisions.
-          </p>
-
-          <a
-            href="/projects/experience"
-            className="experienceLink"
-          >
-            Explore my experience <span>→</span>
-          </a>
-        </div>
-      </section>
-
-      {/* DATA STORIES */}
-      <section id="stories" className="storyBanner">
-        <p className="eyebrow">COMING SOON</p>
-
-        <h2>
-          DATA STORIES
-          <br />
-          FROM <span>EVERYWHERE.</span>
-        </h2>
-
-        <p>
-          Original analysis. Real data. Big questions about the
-          places, people, and systems around us.
+      <section className={styles.curious} aria-labelledby="curious-heading">
+        <p className={styles.label}>Currently curious about</p>
+        <h2 id="curious-heading">Still looking around the next corner.</h2>
+        <ul className={styles.curiousList}>
+          <li>Data Science</li>
+          <li>Machine Learning</li>
+          <li>AI</li>
+          <li>Analytics Engineering</li>
+          <li>Data Systems</li>
+        </ul>
+        <p className={styles.body}>
+          There&apos;s still a lot I want to learn. That&apos;s part of the
+          fun.
         </p>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="about">
-        <p className="eyebrow">A LITTLE ABOUT ME</p>
-
+      <section id="contact" className={styles.contact}>
+        <p className={styles.label}>Say hello</p>
         <h2>
-          Numbers are useful.
+          Got a question?
           <br />
-          <span>Stories make them matter.</span>
+          <em>Let&apos;s talk.</em>
         </h2>
-
-        <p className="aboutText">
-          I’m a Data Analyst with a background in Mathematics and
-          experience working with operational data, data quality,
-          reporting, databases, and business analytics.
-        </p>
-
-        <a href="/about" className="aboutLink">
-          More about me <span>→</span>
+        <a
+          href="mailto:okonkwoemmanuella2@gmail.com"
+          className={styles.contactEmail}
+        >
+          okonkwoemmanuella2@gmail.com
+          <span>↗</span>
         </a>
       </section>
 
-      {/* CONTACT */}
-      <footer id="contact">
-        <div>
-          <p className="eyebrow">LET’S CONNECT</p>
-
-          <h2>
-            Have a dataset
-            <br />
-            worth exploring?
-          </h2>
-        </div>
-
-        <a href="mailto:okonkwoemmanuella2@gmail.com">
-          Get in touch →
-        </a>
+      <footer className={styles.footer}>
+        <span>
+          ELLA<span>.</span>
+        </span>
+        <span>Data · analysis · systems</span>
+        <span>© {new Date().getFullYear()}</span>
       </footer>
     </main>
   );

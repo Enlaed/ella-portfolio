@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function ProjectNavigation({ previous, next }: { previous?: { href: string; label: string }; next?: { href: string; label: string } }) { return <nav className="project-navigation u-container" aria-label="Project navigation">{previous ? <Link href={previous.href}>← {previous.label}</Link> : <span />}{next ? <Link href={next.href}>{next.label} →</Link> : <span />}</nav>; }

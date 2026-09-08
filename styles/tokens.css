@@ -1,0 +1,20 @@
+:root {
+  --color-cream: #f8f6f2;
+  --color-ink: #1d1a1c;
+  --color-pink: #e83e8c;
+  --color-pink-soft: #f7d7e7;
+  --color-muted: #6f6a6d;
+  --color-rule: #ded9dc;
+  --font-sans: Candara, "Trebuchet MS", Georgia, serif;
+  --font-mono: "Courier New", monospace;
+  --content-width: 76rem;
+  --page-gutter: clamp(1.25rem, 4vw, 4rem);
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6.5rem;
+  --radius-none: 0;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
