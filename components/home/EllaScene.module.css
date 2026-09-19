@@ -1,0 +1,142 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 34rem;
+  margin: 0;
+  pointer-events: none;
+}
+
+.wrap::after {
+  position: absolute;
+  inset: -8% -18% -12% -22%;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-cream) 0%,
+      rgb(248 246 242 / 88%) 14%,
+      rgb(248 246 242 / 28%) 36%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-cream) 0%,
+      transparent 18%,
+      transparent 68%,
+      rgb(248 246 242 / 55%) 86%,
+      var(--color-cream) 100%
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.idle {
+  position: absolute;
+  inset: 0 -22% 0 -8%;
+  transform-origin: 70% 55%;
+  animation: float 10s ease-in-out infinite;
+}
+
+.portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 18%;
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 35%) 22%,
+    #000 46%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 35%) 22%,
+    #000 46%,
+    #000 100%
+  );
+}
+
+.caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  max-width: 22rem;
+  margin: 0;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 0.1vw + 0.6rem, 0.72rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: right;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@media (max-width: 760px) {
+  .wrap {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .idle {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .wrap::after {
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-cream) 0%,
+        transparent 18%,
+        transparent 82%,
+        var(--color-cream) 100%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-cream) 0%,
+        transparent 16%,
+        transparent 72%,
+        var(--color-cream) 100%
+      );
+  }
+
+  .portrait {
+    object-position: 60% 20%;
+    opacity: 0.64;
+  }
+
+  .caption {
+    position: relative;
+    max-width: none;
+    margin-top: 0.45rem;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idle {
+    animation: none;
+  }
+}
